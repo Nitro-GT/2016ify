@@ -1523,3 +1523,6 @@ local RestrictedLighting = {
     end)
    end
 end)
+while wait(5) do
+ game.Players.LocalPlayer:GetMouse().Icon = "rbxassetid://13779882143"
+end
