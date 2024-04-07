@@ -40,7 +40,9 @@ game.CoreGui.DeltaIcon.ImageButton.Image = "rbxassetid://0"
 game.CoreGui.DeltaIcon.ImageButton.BackgroundTransparency = 1
 end)
 settings().Rendering.QualityLevel = 2
+if _G.FullMap == true then
 Instance.new("Humanoid",workspace)
+end
 local lastname = "z"
 local n = 0
 local gn = math.random(0,9999)
