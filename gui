@@ -1219,7 +1219,7 @@ local function createStuds(part, surfaceType)
 		if surfaceType == "Studs" then
 			if not part.Parent:FindFirstChild("Humanoid") and not string.find(part.Name,"Arm") and part.Name ~= "Torso"  and not string.find(part.Name,"Leg") and part.Name ~= "HumanoidRootPart" or part.Parent == workspace then
 				if not part.Parent:FindFirstChild("StudTexture") then
-					if part.Material == Enum.Material.Plastic and part.Shape = Enum.PartType.Block then
+					if part.Material == Enum.Material.Plastic and part.Shape == Enum.PartType.Block then
 						-- Top
 						if part.TopSurface == Enum.SurfaceType.Studs then
 							local tex = Instance.new("Texture")
@@ -1293,7 +1293,7 @@ local function createStuds(part, surfaceType)
 		if surfaceType == "Universal" then
 			if not part.Parent:FindFirstChild("Humanoid") or part.Parent == workspace then
 				if not part.Parent:FindFirstChild("UniversalTexture") then
-					if part.Material == Enum.Material.Plastic  and part.Shape = Enum.PartType.Block then
+					if part.Material == Enum.Material.Plastic  and part.Shape == Enum.PartType.Block then
 						-- Top
 						if part.TopSurface == Enum.SurfaceType.Universal then
 							local tex = Instance.new("Texture")
