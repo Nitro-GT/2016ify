@@ -9,8 +9,18 @@ How do i use 2016ify?
 ```
 Regular -
 _G.GuestMode = false
+_G.FullMap = true
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nitro-GT/2016ify/main/gui"))()
+
+_G.GuestMode = false
+_G.FullMap = false
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Nitro-GT/2016ify/main/gui"))()
 
 Guest Recreation -
 _G.GuestMode = true
+_G.FullMap = false
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nitro-GT/2016ify/main/gui"))()
+
+_G.GuestMode = true
+_G.FullMap = true
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Nitro-GT/2016ify/main/gui"))()
