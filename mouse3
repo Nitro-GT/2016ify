@@ -1,4 +1,4 @@
-local UseOldMouseAPI = true
+local UseOldMouseAPI = false
 
 local rbxGui = Instance.new("ScreenGui")
 rbxGui.Name = "FakeMouseGui"
