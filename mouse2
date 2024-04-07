@@ -1,4 +1,4 @@
-local UseOldMouseAPI = true
+local UseOldMouseAPI = false
 
 local rbxGui = Instance.new("ScreenGui")
 rbxGui.Name = "FakeMouseGui"
@@ -123,20 +123,13 @@ if UseOldMouseAPI == true then
 		end)
 	end
 else
-	local mc = _G:GetService("MouseController")
 	local uis = game:GetService("UserInputService")
 	
 	game:GetService("RunService").RenderStepped:Connect(function()
 		local icon = plr:GetMouse().Icon
-		customMouseIconEnabled = mc.CustomMouseIconEnabled
+		customMouseIconEnabled = true
 		
-		if icon ~= "" and icon ~= mouseLockIcon and icon ~= overObjectIcon and icon ~= notOverObjectIcon then
-			customMouseIconEnabled = true
-			mc:ChangeMouseIcon(icon)
-		else
-			customMouseIconEnabled = false
-			mc:DisableCustomIcon()
-		end
+
 		
 		mouse.Position = UDim2.new(0, plrMouse.X - 33, 0, plrMouse.Y + 4)
 		
@@ -152,7 +145,7 @@ else
 			end
 		end
 		
-		local guis = game.CoreGui:GetGuiObjectsAtPosition(plrMouse.X, plrMouse.Y)
+		local guis = plr.PlayerGui:GetGuiObjectsAtPosition(plrMouse.X, plrMouse.Y)
 		local goodGuis = 0
 		
 		for v,i in pairs(guis) do
