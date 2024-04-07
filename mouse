@@ -58,8 +58,6 @@ mouse.Image = notOverObjectIcon
 mouse.Visible = not mobile
 mouse.Parent = rbxGui
 mouse.Size = UDim2.new(0, 64, 0, 64)
-
-local mc = require(game:GetObjects("rbxassetid://17051602925"))
 local inFrame = false
 
 local customMouseIconEnabled
@@ -84,7 +82,7 @@ if UseOldMouseAPI == true then
 
 	
 	game:GetService("RunService").RenderStepped:Connect(function()
-		customMouseIconEnabled = mc.CustomMouseIconEnabled
+		customMouseIconEnabled = true
 		mouse.Position = UDim2.new(0, plrMouse.X - 33, 0, plrMouse.Y + 4)
 		if msVal.Value then
 			mouse.Size = UDim2.new(0, 32, 0, 32)
