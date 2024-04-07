@@ -1,0 +1,170 @@
+local UseOldMouseAPI = false
+
+local rbxGui = Instance.new("ScreenGui")
+rbxGui.Name = "FakeMouseGui"
+rbxGui.IgnoreGuiInset = true
+rbxGui.DisplayOrder = 25000
+rbxGui.ResetOnSpawn = false
+
+local plr = game.Players.LocalPlayer
+rbxGui.Parent = game.CoreGui
+local plrMouse = plr:GetMouse()
+
+-- TODO: use a table for these instead?
+local mouseLockIcon = "rbxasset://textures/MouseLockedCursor.png"
+local overObjectIcon = "rbxassetid://7471776409"
+local notOverObjectIcon = "rbxassetid://7471776177"
+
+local gameObjects = {
+	game.Workspace,
+	game.Players,
+	game.Lighting,
+	game.ReplicatedFirst,
+	game.ReplicatedStorage,
+	game.StarterGui,
+	game.StarterPack,
+	game.StarterPlayer,
+	game.StarterPlayer.StarterPlayerScripts,
+	game.StarterPlayer.StarterCharacterScripts,
+	game.Chat,
+	game.LocalizationService
+}
+
+local blacklistedObjects = {
+	FakeMouse = true,
+	OB_MessageLabel = true,
+	OB_RecordingBorder = true,
+	SpeedFrame = true,
+	HurtOverlay = true,
+	BackupMouse = true -- 2016 Developer Console
+}
+
+function getGameChildren() -- thanks for the security check roblox
+	return gameObjects
+end
+
+game:GetService("UserInputService").MouseIconEnabled = false
+
+if game:GetService("UserInputService").TouchEnabled and not game:GetService("UserInputService").KeyboardEnabled and not
+	game:GetService("UserInputService").MouseEnabled and not game:GetService("GuiService"):IsTenFootInterface() then
+	mobile = true
+end
+
+local mouse = Instance.new("ImageLabel")
+mouse.Name = "FakeMouse"
+mouse.ZIndex = 10000
+mouse.BackgroundTransparency = 1
+mouse.Image = notOverObjectIcon
+mouse.Visible = not mobile
+mouse.Parent = rbxGui
+mouse.Size = UDim2.new(0, 64, 0, 64)
+local inFrame = false
+
+local customMouseIconEnabled
+
+local msVal = Instance.new("BoolValue")
+msVal.Name = "MouseLocked"
+msVal.Value = false
+msVal.Parent = game.CoreGui:WaitForChild("RobloxGui") -- TODO: keep this in FakeMouseGui
+
+msVal.Changed:Connect(function()
+	if msVal.Value == false then
+		mouse.Size = UDim2.new(0, 64, 0, 64)
+		if not inFrame then
+			mouse.Image = notOverObjectIcon
+		else
+			mouse.Image = overObjectIcon
+		end
+	end
+end)
+
+if UseOldMouseAPI == true then
+
+	
+	game:GetService("RunService").RenderStepped:Connect(function()
+		customMouseIconEnabled = true
+		mouse.Position = UDim2.new(0, plrMouse.X - 33, 0, plrMouse.Y + 4)
+		if msVal.Value then
+			mouse.Size = UDim2.new(0, 32, 0, 32)
+			mouse.Image = mouseLockIcon
+		else
+			mouse.Size = UDim2.new(0, 64, 0, 64)
+			if not inFrame and not customMouseIconEnabled then
+				mouse.Image = notOverObjectIcon
+			end
+		end
+	end)
+	
+	local function mouseConnect(i)
+	--[[if i:IsA("TextButton") and i.BackgroundTransparency <= 0.998 or i:IsA("ImageButton") and i.ImageTransparency <= 0.998
+		or i:IsA("Frame") and i.BackgroundTransparency <= 0.998 then--]]
+		if i:IsA("GuiObject") and i.BackgroundTransparency <= 0.998 then
+			i.MouseEnter:Connect(function() 
+				if not msVal.Value and not customMouseIconEnabled then
+					mouse.Image = overObjectIcon
+					inFrame = true
+				end
+			end)
+
+			i.MouseLeave:Connect(function() 
+				if not msVal.Value and not customMouseIconEnabled then
+					mouse.Image = notOverObjectIcon
+					inFrame = false
+				end
+			end)
+		end
+	end
+
+	for v,i in pairs(getGameChildren()) do
+		mouseConnect(i)
+
+		i.DescendantAdded:Connect(function(d)
+			mouseConnect(d)
+		end)
+	end
+else
+	local uis = game:GetService("UserInputService")
+	
+	game:GetService("RunService").RenderStepped:Connect(function()
+		local icon = plr:GetMouse().Icon
+		customMouseIconEnabled = true
+		
+
+		
+		mouse.Position = UDim2.new(0, plrMouse.X - 33, 0, plrMouse.Y + 4)
+		
+		if msVal.Value then
+			mouse.Size = UDim2.new(0, 32, 0, 32)
+			mouse.Image = mouseLockIcon
+		else
+			mouse.Size = UDim2.new(0, 64, 0, 64)
+			if not inFrame and not customMouseIconEnabled then
+				mouse.Image = notOverObjectIcon
+			elseif inFrame and not customMouseIconEnabled then
+				mouse.Image = overObjectIcon
+			end
+		end
+		
+		local guis = game.CoreGui:GetGuiObjectsAtPosition(plrMouse.X, plrMouse.Y)
+		local goodGuis = 0
+		
+		for v,i in pairs(guis) do
+			if blacklistedObjects[i.Name] ~= true then
+				if i:IsA("GuiObject") and not i:IsA("ImageLabel") and not i:IsA("ImageButton") and i.BackgroundTransparency < 0.998
+					and i.Visible == true or i:IsA("ImageLabel") and i.ImageTransparency < 0.998 and
+					i.Visible == true or i:IsA("ImageButton") and i.ImageTransparency < 0.998 and i.Visible == true or uis:GetFocusedTextBox() ~= nil then
+					
+					goodGuis += 1
+				end
+			end
+		end
+		
+		if goodGuis > 0 then
+			inFrame = true
+		else
+			inFrame = false
+		end
+		
+		goodGuis = 0
+	end)
+end
