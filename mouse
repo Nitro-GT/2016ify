@@ -1,4 +1,4 @@
-local UseOldMouseAPI = false
+local UseOldMouseAPI = true
 
 local rbxGui = Instance.new("ScreenGui")
 rbxGui.Name = "FakeMouseGui"
@@ -123,7 +123,6 @@ if UseOldMouseAPI == true then
 		end)
 	end
 else
-	local mc = _G:GetService("MouseController")
 	local uis = game:GetService("UserInputService")
 	
 	game:GetService("RunService").RenderStepped:Connect(function()
