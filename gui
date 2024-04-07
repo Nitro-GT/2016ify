@@ -1422,6 +1422,7 @@ if v.Name ~= "PlayEmote" then
 v:Destroy()
 end
 end
+end
 end)
 
 local Lighting = game.Lighting
