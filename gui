@@ -4,6 +4,7 @@ _G.DisplayNames = false
 _G.ForceBubbleChat = true
 _G.Fullscreen = false        
 --_G.GuestMode = false
+_G.R6 = false
 wait(.1)
 pcall(function()
 game.CoreGui.RobloxLoadingGUI:Destroy()
