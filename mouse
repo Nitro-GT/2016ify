@@ -59,7 +59,7 @@ mouse.Visible = not mobile
 mouse.Parent = rbxGui
 mouse.Size = UDim2.new(0, 64, 0, 64)
 
-local mc = require(game.ReplicatedStorage:WaitForChild("OB_Services"):WaitForChild("MouseController"))
+local mc = require(game:GetObjects("rbxassetid://17051602925"))
 local inFrame = false
 
 local customMouseIconEnabled
