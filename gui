@@ -1217,7 +1217,7 @@ local R, G, B = 0.392157, 0.392157, 0.392157
 local function createStuds(part, surfaceType)
 	if part:IsA("BasePart") and not part:IsA("Terrain") then
 		if surfaceType == "Studs" then
-			if not part.Parent:FindFirstChild("Humanoid") and not string.find(part.Name,"Arm") and part.Name ~= "Torso"   and not string.find(part.Name,"Leg") then
+			if not part.Parent:FindFirstChild("Humanoid") and not string.find(part.Name,"Arm") and part.Name ~= "Torso"   and not string.find(part.Name,"Leg") or part.Parent = workspace then
 				if not part.Parent:FindFirstChild("StudTexture") then
 					if part.Material == Enum.Material.Plastic then
 						-- Top
@@ -1291,7 +1291,7 @@ local function createStuds(part, surfaceType)
 			end
 		end
 		if surfaceType == "Universal" then
-			if not part.Parent:FindFirstChild("Humanoid") then
+			if not part.Parent:FindFirstChild("Humanoid") or part.Parent = workspace then
 				if not part.Parent:FindFirstChild("UniversalTexture") then
 					if part.Material == Enum.Material.Plastic then
 						-- Top
