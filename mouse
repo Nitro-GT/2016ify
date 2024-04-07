@@ -67,7 +67,7 @@ local customMouseIconEnabled
 local msVal = Instance.new("BoolValue")
 msVal.Name = "MouseLocked"
 msVal.Value = false
-msVal.Parent = plr.PlayerGui:WaitForChild("RobloxGui") -- TODO: keep this in FakeMouseGui
+msVal.Parent = game.CoreGui:WaitForChild("RobloxGui") -- TODO: keep this in FakeMouseGui
 
 msVal.Changed:Connect(function()
 	if msVal.Value == false then
@@ -154,7 +154,7 @@ else
 			end
 		end
 		
-		local guis = plr.PlayerGui:GetGuiObjectsAtPosition(plrMouse.X, plrMouse.Y)
+		local guis = game.CoreGui:GetGuiObjectsAtPosition(plrMouse.X, plrMouse.Y)
 		local goodGuis = 0
 		
 		for v,i in pairs(guis) do
