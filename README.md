@@ -5,6 +5,9 @@ What is 2016ify?
 How accurate is 2016ify?
 > 2016ify is about 99.6% accurate as I joined in 2016
 
+Does 2016ify support TextChatService?
+> As of the latest update, 2016ify does support TCS
+
 How do i use 2016ify?
 ```
 Regular -
