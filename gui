@@ -1370,8 +1370,12 @@ local function createStuds(part, surfaceType)
 end
 
 for v,i in pairs(workspace:GetDescendants()) do
+pcall(function()
 	createStuds(i, "Studs")
+end)
+pcall(function()
 	createStuds(i, "Universal")
+end)
 end
 
 function linkChangedFunc(part)
@@ -1383,8 +1387,12 @@ function linkChangedFunc(part)
 end
 
 workspace.DescendantAdded:Connect(function(i)
+pcall(function()
 	createStuds(i, "Studs")
+end)
+pcall(function()
 	createStuds(i, "Universal")
+end)
 end)
 
 for v,i in pairs(workspace:GetDescendants()) do
