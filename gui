@@ -236,6 +236,7 @@ if not string.find(msg, "/w ") then
 task.wait()
 	oldmessage = msg
 else
+print(msg)
 local tc = game:GetService("TextChatService").TextChannels.RBXGeneral
 tc:SendAsync(msg)
 task.wait()
