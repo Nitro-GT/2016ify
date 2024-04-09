@@ -235,6 +235,11 @@ if not string.find(msg, "/w ") then
   game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents:FindFirstChild("SayMessageRequest"):FireServer(msg, "All")
 task.wait()
 	oldmessage = msg
+else
+local tc = game:GetService("TextChatService").TextChannels.RBXGeneral
+tc:SendAsync(msg)
+task.wait()
+	oldmessage = msg
     end
    end
 end
