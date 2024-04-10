@@ -1374,7 +1374,7 @@ local function createStuds(part, surfaceType)
 		end
 	end
 end
-
+if _G.Studs == true then
 for v,i in pairs(workspace:GetDescendants()) do
 pcall(function()
 	createStuds(i, "Studs")
@@ -1412,7 +1412,7 @@ for v,i in pairs(workspace:GetDescendants()) do
 		linkChangedFunc(i)
 	end
 end
-
+end
 if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").RigType  == Enum.HumanoidRigType.R15 then
 task.wait(.25)
 Player = game.Players.LocalPlayer
