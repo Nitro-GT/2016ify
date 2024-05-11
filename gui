@@ -1429,6 +1429,7 @@ game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(c)
 task.wait(.2)
 if c:WaitForChild("Humanoid").RigType == Enum.HumanoidRigType.R15 then
 task.wait(.25)
+print("huh")
 Player = game:GetService("Players").LocalPlayer
 c = Player.Character
 an = c:WaitForChild("Animate")
