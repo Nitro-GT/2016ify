@@ -122,7 +122,6 @@ end)
 			end
 		end
 	end
-	--
 	workspace.DescendantAdded:Connect(function(i)
 		if i:IsA("Hat") or i:IsA("Accessory") then
 			if i:FindFirstChild("Handle") then
@@ -1412,6 +1411,13 @@ end
 end
 end
 game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(c)
+	for v,i in pairs(workspace:GetDescendants()) do
+		if i:IsA("Hat") or i:IsA("Accessory") then
+			if i:FindFirstChild("Handle") then
+				i.Handle.Material = Enum.Material.SmoothPlastic
+			end
+		end
+	end
 task.wait(.2)
 if c:WaitForChild("Humanoid").RigType == Enum.HumanoidRigType.R15 then
 task.wait(.25)
