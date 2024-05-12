@@ -1,0 +1,31 @@
+game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(c)
+	for v,i in pairs(workspace:GetDescendants()) do
+		if i:IsA("Hat") or i:IsA("Accessory") then
+			if i:FindFirstChild("Handle") then
+				i.Handle.Material = Enum.Material.SmoothPlastic
+			end
+		end
+	end
+task.wait(.2)
+if c:WaitForChild("Humanoid").RigType == Enum.HumanoidRigType.R15 then
+task.wait(.25)
+print("huh")
+Player = game:GetService("Players").LocalPlayer
+c = Player.Character
+an = c:WaitForChild("Animate")
+  local a = game:GetObjects("rbxassetid://6816103163")[1]
+  a.Parent = c
+  for i,v in pairs(an:GetChildren()) do
+if v.Name ~= "PlayEmote" then
+v:Destroy()
+end
+end
+end
+	for v,i in pairs(workspace:GetDescendants()) do
+		if i:IsA("Hat") or i:IsA("Accessory") then
+			if i:FindFirstChild("Handle") then
+				i.Handle.Material = Enum.Material.SmoothPlastic
+			end
+		end
+	end
+end)
