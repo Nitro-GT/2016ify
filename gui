@@ -34,9 +34,8 @@ end)
 
 ]]
 pcall(function()
-local getNil = function(name, class) for _, v in next, getnilinstances() do if v.ClassName == class and v.Name == name then return v end end end
 
-getNil("Game", "DataModel").Chat.ChatScript.Disabled = true 
+game.Chat.ChatScript.Disabled = true 
 end)
 settings().Rendering.QualityLevel = 2
 if _G.FullMap == true then
