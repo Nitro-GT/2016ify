@@ -281,7 +281,7 @@ task.spawn(function()
        for i,v in pairs(game.Players:GetChildren()) do
            if v.Character ~= nil then
                if v.Character:FindFirstChild("Humanoid") then
-                   sethiddenproperty(v.Character.Humanoid, "HealthDisplayType", Enum.HumanoidHealthDisplayType.AlwaysOn)
+                   v.Character.Humanoid.HealthDisplayType = Enum.HumanoidHealthDisplayType.AlwaysOn
                end
            end
        end
