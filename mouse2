@@ -3,7 +3,7 @@ local UseOldMouseAPI = false
 local rbxGui = Instance.new("ScreenGui")
 rbxGui.Name = "FakeMouseGui"
 rbxGui.IgnoreGuiInset = true
-rbxGui.DisplayOrder = 25000
+rbxGui.DisplayOrder = 2500000
 rbxGui.ResetOnSpawn = false
 
 local plr = game.Players.LocalPlayer
