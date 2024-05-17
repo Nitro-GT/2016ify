@@ -1142,18 +1142,9 @@ task.spawn(function()
    
    --CUSTOM FUNCTION FOR SYNAPSE X
    function AddCoreScriptLocal(str)
-       local Inject = [==[
-           --Get names
-           script.Name = script.Name..[[]==]..str..[==[]]
-           --FAKE SCRIPT
-           local script = Instance.new("LocalScript", game.CoreGui.RobloxGui)
-           script.Name = [[CoreScripts/]==]..str..[==[]]
-           script.Disabled = true
-           script.Source = [[print("Doin' your mom")]]
-           
-       ]==]
+
        
-       loadstring(Inject..tostring(RobloxGui.CoreScriptSyn[str].Source))()
+       loadstring(tostring(RobloxGui.CoreScriptSyn[str].Source))()
    end
    
    -- TopBar
