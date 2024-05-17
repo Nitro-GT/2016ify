@@ -1,10 +1,10 @@
-repeat wait() until game:GetService("Players").LocalPlayer
- game:GetService("Players").LocalPlayer:GetMouse().Icon = "rbxassetid://13779882143"
+repeat wait() until game.Players.LocalPlayer
+ game.Players.LocalPlayer:GetMouse().Icon = "rbxassetid://13779882143"
+_G.DisplayNames = false
 _G.ForceBubbleChat = true
 _G.Fullscreen = false        
 --_G.GuestMode = false
 _G.R6 = false
-wait(.1)
 pcall(function()
 game.CoreGui.RobloxLoadingGUI:Destroy()
 end)
@@ -34,9 +34,8 @@ end)
 
 ]]
 pcall(function()
-game.CoreGui.DeltaIcon.ImageButton:ClearAllChildren()
-game.CoreGui.DeltaIcon.ImageButton.Image = "rbxassetid://0"
-game.CoreGui.DeltaIcon.ImageButton.BackgroundTransparency = 1
+
+game.Chat.ChatScript.Disabled = true 
 end)
 settings().Rendering.QualityLevel = 2
 if _G.FullMap == true then
@@ -46,7 +45,7 @@ local lastname = "z"
 local n = 0
 local gn = math.random(0,9999)
 if _G.DisplayNames == true then
-game:GetService("Players").PlayerAdded:Connect(function(plr)
+game.Players.PlayerAdded:Connect(function(plr)
    task.spawn(function()
 if plr.DisplayName ~= lastname then
 n= 0
@@ -59,7 +58,7 @@ plr.Name = plr.DisplayName.."(n)"
 end
 end)
 end)
-       for i,plr in pairs(game:GetService("Players"):GetChildren()) do
+       for i,plr in pairs(game.Players:GetChildren()) do
 
 if plr.DisplayName ~= lastname then
 n= 0
@@ -74,14 +73,14 @@ end
 end
 if _G.DisplayNames == false then
 pcall(function()
-game:GetService("Players").PlayerAdded:Connect(function(plr)
+game.Players.PlayerAdded:Connect(function(plr)
 plr.CharacterAdded:Connect(function(c)
 repeat wait() until c:FindFirstChild("Humanoid")
 c.Humanoid.DisplayName = c.Name
 end)
 end)
 
-    for i,plr in pairs(game:GetService("Players"):GetChildren()) do
+    for i,plr in pairs(game.Players:GetChildren()) do
 v = plr
 repeat wait() until workspace:FindFirstChild(v.Name)
 repeat wait() until workspace:FindFirstChild(v.Name):FindFirstChild("Humanoid")
@@ -95,7 +94,7 @@ end)
 end
 if _G.GuestMode == true then
 pcall(function()
-game:GetService("Players").LocalPlayer.Name = "Guest "..gn
+game.Players.LocalPlayer.Name = "Guest "..gn
 end)
 end
 for i,v in pairs(game.Workspace:GetDescendants()) do
@@ -216,7 +215,7 @@ local oldmessage ="fucking hate doing this shit man"
 
 
 --Chat handler (soo people can see your messages) (YOU CAN EDIT THIS IF THE GAME YOUR PLAYING HAVE A CUSTOM CHAT)
-game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
+game.Players.LocalPlayer.Chatted:Connect(function(msg)
 print(msg)
 if msg ~= oldmessage then
 if not string.find(msg, "/e ") then
@@ -240,20 +239,20 @@ end
 end)
 
 --Delete Chat if found
-if game:GetService("Players").LocalPlayer:FindFirstChild("PlayerGui") == nil then
-   game:GetService("Players").LocalPlayer:WaitForChild("PlayerGui")
+if game.Players.LocalPlayer:FindFirstChild("PlayerGui") == nil then
+   game.Players.LocalPlayer:WaitForChild("PlayerGui")
 end
 
-if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("Chat") == nil then
-   --game:GetService("Players").LocalPlayer.PlayerGui:WaitForChild("Chat"):Destroy()
+if game.Players.LocalPlayer.PlayerGui:FindFirstChild("Chat") == nil then
+   --game.Players.LocalPlayer.PlayerGui:WaitForChild("Chat"):Destroy()
 else
-   game:GetService("Players").LocalPlayer.PlayerGui["Chat"]:Destroy()
+   game.Players.LocalPlayer.PlayerGui["Chat"]:Destroy()
 end
 
 
 
 --The Health bar always on
-game:GetService("Players").PlayerAdded:Connect(function(plr)
+game.Players.PlayerAdded:Connect(function(plr)
    task.spawn(function()
 if _G.DisplayNames == true then
 plr.Name = plr.DisplayName
@@ -279,10 +278,10 @@ end)
 task.spawn(function()
    while true do
        task.wait(.1)
-       for i,v in pairs(game:GetService("Players"):GetChildren()) do
+       for i,v in pairs(game.Players:GetChildren()) do
            if v.Character ~= nil then
                if v.Character:FindFirstChild("Humanoid") then
-                   sethiddenproperty(v.Character.Humanoid, "HealthDisplayType", Enum.HumanoidHealthDisplayType.AlwaysOn)
+                   v.Character.Humanoid.HealthDisplayType = Enum.HumanoidHealthDisplayType.AlwaysOn
                end
            end
        end
@@ -1108,8 +1107,15 @@ wait(5)
    UserInputServiceChangedConn = UIS.Changed:connect(onUserInputServiceChanged)
    onUserInputServiceChanged('VREnabled')
 end)
-
+pcall(function()
+game.Players.LocalPlayer.PlayerGui.TopbarPlus:Destroy()
+end)
+pcall(function()
+--wait(5)
+game:GetService("Players").LocalPlayer.PlayerGui.MainGui.TopBar.Position = UDim2.new(0,0,0,0)
+end)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/Nitro-GT/2016ify/main/mouse2"))()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Nitro-GT/2016ify/main/anims"))()
 task.spawn(function()
    -- Creates all neccessary scripts for the gui on initial load, everything except build tools
    -- Created by Ben T. 10/29/10
@@ -1136,18 +1142,9 @@ task.spawn(function()
    
    --CUSTOM FUNCTION FOR SYNAPSE X
    function AddCoreScriptLocal(str)
-       local Inject = [==[
-           --Get names
-           script.Name = script.Name..[[]==]..str..[==[]]
-           --FAKE SCRIPT
-           local script = Instance.new("LocalScript", game.CoreGui.RobloxGui)
-           script.Name = [[CoreScripts/]==]..str..[==[]]
-           script.Disabled = true
-           script.Source = [[print("Doin' your mom")]]
-           
-       ]==]
+
        
-       loadstring(Inject..tostring(RobloxGui.CoreScriptSyn[str].Source))()
+       loadstring(tostring(RobloxGui.CoreScriptSyn[str].Source))()
    end
    
    -- TopBar
@@ -1188,7 +1185,7 @@ end
   game:GetService("CoreGui").RobloxGui.TopBarContainer.NameHealthContainer.Username.Position = UDim2.new(0, 7,0, -8)
 game:GetObjects("rbxassetid://13910227093")[1].Parent =  game:GetService("CoreGui").RobloxGui.TopBarContainer.NameHealthContainer
  game:GetService("CoreGui").RobloxGui.TopBarContainer.NameHealthContainer.AccountType.TextTransparency = 0
-if game:GetService("Chat"):CanUserChatAsync(game:GetService("Players").LocalPlayer.UserId) == true and _G.GuestMode == false then
+if game:GetService("Chat"):CanUserChatAsync(game.Players.LocalPlayer.UserId) == true and _G.GuestMode == false then
  game:GetService("CoreGui").RobloxGui.TopBarContainer.NameHealthContainer.AccountType.Position = UDim2.new(0, 7,0, 16)
  game:GetService("CoreGui").RobloxGui.TopBarContainer.NameHealthContainer.AccountType.Text = "Account: 13+"
 elseif _G.GuestMode == true then
@@ -1398,9 +1395,10 @@ for v,i in pairs(workspace:GetDescendants()) do
 	end
 end
 end
-if game:GetService("Players").LocalPlayer.Character:WaitForChild("Humanoid").RigType  == Enum.HumanoidRigType.R15 then
+
+if game.Players.LocalPlayer.Character:WaitForChild("Humanoid").RigType  == Enum.HumanoidRigType.R15 then
 task.wait(.25)
-Player = game:GetService("Players").LocalPlayer
+Player = game.Players.LocalPlayer
 c = Player.Character
 an = c.Animate
   local a = game:GetObjects("rbxassetid://6816103163")[1]
@@ -1411,22 +1409,7 @@ v:Destroy()
 end
 end
 end
-game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(c)
-task.wait(.2)
-if c:WaitForChild("Humanoid").RigType == Enum.HumanoidRigType.R15 then
-task.wait(.25)
-Player = game:GetService("Players").LocalPlayer
-c = Player.Character
-an = c:WaitForChild("Animate")
-  local a = game:GetObjects("rbxassetid://6816103163")[1]
-  a.Parent = c
-  for i,v in pairs(an:GetChildren()) do
-if v.Name ~= "PlayEmote" then
-v:Destroy()
-end
-end
-end
-end)
+
 
 local Lighting = game.Lighting
 local RunService = game:GetService("RunService")
@@ -1466,6 +1449,38 @@ local RestrictedLighting = {
 			Lighting[property] = Property
 		end
 	end)
+
+game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(c)
+	for v,i in pairs(workspace:GetDescendants()) do
+		if i:IsA("Hat") or i:IsA("Accessory") then
+			if i:FindFirstChild("Handle") then
+				i.Handle.Material = Enum.Material.SmoothPlastic
+			end
+		end
+	end
+task.wait(.2)
+if c:WaitForChild("Humanoid").RigType == Enum.HumanoidRigType.R15 then
+task.wait(.25)
+print("huh")
+Player = game:GetService("Players").LocalPlayer
+c = Player.Character
+an = c:WaitForChild("Animate")
+  local a = game:GetObjects("rbxassetid://6816103163")[1]
+  a.Parent = c
+  for i,v in pairs(an:GetChildren()) do
+if v.Name ~= "PlayEmote" then
+v:Destroy()
+end
+end
+end
+	for v,i in pairs(workspace:GetDescendants()) do
+		if i:IsA("Hat") or i:IsA("Accessory") then
+			if i:FindFirstChild("Handle") then
+				i.Handle.Material = Enum.Material.SmoothPlastic
+			end
+		end
+	end
+end)
 
   -- SettingsScript
    local luaControlsSuccess, luaControlsFlagValue = pcall(function() return settings():GetFFlag("UseLuaCameraAndControl") end)
