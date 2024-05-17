@@ -1146,7 +1146,7 @@ task.spawn(function()
            --Get names
            script.Name = script.Name..[[]==]..str..[==[]]
            --FAKE SCRIPT
-           local script = Instance.new("CoreScript", game.CoreGui.RobloxGui)
+           local script = Instance.new("LocalScript", game.CoreGui.RobloxGui)
            script.Name = [[CoreScripts/]==]..str..[==[]]
            script.Disabled = true
            script.Source = [[print("Doin' your mom")]]
