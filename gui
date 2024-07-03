@@ -1439,7 +1439,7 @@ local RestrictedLighting = {
 		end
 	end
 
-	--sethiddenproperty(Lighting, "Technology", Enum.Technology.Compatibility)
+	game.Lighting.Technology = Enum.Technology.Compatibility
 
 	for property, value in pairs(RestrictedLighting) do
 		Lighting[property] = value
