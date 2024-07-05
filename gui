@@ -54,7 +54,7 @@ plr.Name = plr.DisplayName
 else
 n=n+1
 lastname = plr.DisplayName
-plr.Name = plr.DisplayName.."(n)"
+plr.Name = plr.DisplayName.."("..n..")"
 end
 end)
 end)
@@ -67,7 +67,7 @@ plr.Name = plr.DisplayName
 else
 n=n+1
 lastname = plr.DisplayName
-plr.Name = plr.DisplayName.."(n)"
+plr.Name = plr.DisplayName.."("..n..")"
 end
        end
 end
