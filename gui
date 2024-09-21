@@ -137,7 +137,6 @@ end)
 if game:IsLoaded() ~= true then
    game.Loaded:Wait()
 end
---Needed for nostalgia, Filtering Disabled spoof
 local Workspace = game.Workspace
 local old
 --Script utils
